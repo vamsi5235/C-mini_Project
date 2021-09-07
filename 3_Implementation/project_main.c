@@ -1,112 +1,51 @@
-#include <calculator_operations.h>
+#include <tic.h>
 
-/* Status of the operation requested */
-#define VALID   (1)
-#define INVALID (0)
+static char game_table[9];
 
-/* Calculator operation requested by user*/
-unsigned int calculator_operation = 0;
-
-/* Operands on which calculation is performed */
-int calculator_operand1 = 0;
-int calculator_operand2 = 0;
-
-/* Valid operations */
-enum operations{ ADD=1, SUBTRACT, MULTIPLY, DIVIDE, EXIT };
-
-/* Display the menu of operations supported */
-void calculator_menu(void);
-/* Verifies the requested operations validity */
-int valid_operation(int operation);
-
-
-/* Start of the application */
-int main(int argc, char *argv[])
-{
-    printf("\n****Calculator****\n");
-    while(1)
+int main()
+{   
+    srand( (unsigned int)time(NULL));
+    int l = 0;
+    do
     {
-        calculator_menu();
-    }
-}
+        int n = 0;
 
-void calculator_menu(void)
-{
-    printf("\nAvailable Operations\n");
-    printf("\n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n5. Exit");
-    printf("\n\tEnter your choice\n");
-   
-     __fpurge(stdin);
-    scanf("%d", &calculator_operation);
+        // filling the table with multiple asterisks
+        for (int i = 0; i < 9; i++) game_table[i] = '*';
 
-    if(EXIT == calculator_operation)
-    {
-        printf("\nThank you. Exiting the Application\n");
-        exit(0);
-    }
+        // displaying the main menu
+        printf("|-------------------------------------|\n");
+        printf("|            TIC TAC TOE              |\n");
+        printf("|-------------------------------------|\n");
+        printf("|                                     |\n");
+        printf("|        1. YOU vs COMPUTER           |\n");
+        printf("|        2. YOU vs PLAYER             |\n");
+        printf("|        3.EXIT                       |\n");
+        printf("|-------------------------------------|\n");
+        printf("Enter your choice : ");
+        scanf("%d", &n);
 
-    if(INVALID != valid_operation(calculator_operation))
-    {
-        printf("\n\tEnter your Numbers with space between them\n");
-        __fpurge(stdin);
-        scanf("%d %d", &calculator_operand1, &calculator_operand2);
-    }
-    else
-    {
-        printf("\n\t---Wrong choice---\nEnter to continue\n");
-        __fpurge(stdin);
-        getchar();
-        return;
-        
-    }
-    switch(calculator_operation)
-    {
-        case ADD:
-            printf("\n\t%d + %d = %d\nEnter to continue", 
-            calculator_operand1, 
-            calculator_operand2,
-            add(calculator_operand1, calculator_operand2));
-            
-            __fpurge(stdin);
-            getchar();
+        switch (n)  // switch case to select between single player mode or
+                    // double player mode
+        {
+        case 1:
+            singlemode();
             break;
-        case SUBTRACT:
-            printf("\n\t%d - %d = %d\nEnter to continue", 
-            calculator_operand1, 
-            calculator_operand2,
-            subtract(calculator_operand1, calculator_operand2));
-            
-            __fpurge(stdin);
-            getchar();
-            break;
-        case MULTIPLY:
-            printf("\n\t%d * %d = %d\nEnter to continue", 
-            calculator_operand1, 
-            calculator_operand2,
-            multiply(calculator_operand1, calculator_operand2));
-            
-            __fpurge(stdin);
-            getchar();
-            break;
-        case DIVIDE:
-            printf("\n\t%d / %d = %d\nEnter to continue", 
-            calculator_operand1, 
-            calculator_operand2,
-            divide(calculator_operand1, calculator_operand2));
-            
-            __fpurge(stdin);
-            getchar();
-            break;
-        case 5:
-            exit(0);
+        case 2:
+            doublemode();
             break;
         default:
-            printf("\n\t---It should never come here---\n");
-    }
+            printf("THANK YOU and EXIT!");
+        }
+
+        printf("Next game ? : ");
+        printf("Enter 1 – YES and 0 - NO ");
+        scanf("%d", &l);
+
+    } while (l == 1);
+
+    return 0;
 }
 
-int valid_operation(int operation)
-{
-    /* Check if the operation is a valid operation */
-    return ((ADD <= operation) && (EXIT >= operation)) ? VALID: INVALID;
-}
+
+
