@@ -16,3 +16,5 @@ The tic-tac-toe game is played on a 3x3 grid the game is played by two players, 
 * c/c++ Extension
 # Run 
 To Run this code , You Need to install Vs code 
+# Setup
+To set Vs code You follow this link https://code.visualstudio.com/learn/get-started/basics
