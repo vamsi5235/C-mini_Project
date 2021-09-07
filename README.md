@@ -8,8 +8,8 @@ The tic-tac-toe game is played on a 3x3 grid the game is played by two players, 
 # Header Files
 * stdlib.h
 * string.h
-*string.h
-*time.h
+* string.h
+* time.h
 
 # Extensions
 * Code Runner
