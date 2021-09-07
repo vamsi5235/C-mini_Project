@@ -1,5 +1,77 @@
-#include <tic.h>
- 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
+// Functions Declarations
+static void singlemode();
+static void doublemode();
+static void placex(int);  // used for placing position of X by the 1st player
+static void place();      // used by the computer to place O
+static void placey(int);  // used in Double Player mode by the 2nd player to
+                          // place the position of O
+int checkwin();  // checks everytime when a player or computer places 'X' or 'O'
+
+/** Tic-Tac-Toe table, so basically we are using variable 'game_table' as the table(size:3X3) and
+ * updating it regularly
+ */
+static char game_table[9];
+
+/**
+ * Main program function.
+ * @returns 0 on clean exit. 
+ * @note No checks are included for program execution failures!
+ */
+int main()
+{   
+    srand( (unsigned int)time(NULL));
+    int l = 0;
+    do
+    {
+        int n = 0;
+
+        // filling the table with multiple asterisks
+        for (int i = 0; i < 9; i++) game_table[i] = '*';
+
+        // displaying the main menu
+        printf("|-------------------------------------|\n");
+        printf("|            TIC TAC TOE              |\n");
+        printf("|-------------------------------------|\n");
+        printf("|                                     |\n");
+        printf("|        1. YOU vs COMPUTER           |\n");
+        printf("|        2. YOU vs PLAYER             |\n");
+        printf("|        3. EXIT                      |\n");
+        printf("|-------------------------------------|\n");
+        printf("Enter your choice : ");
+        scanf("%d", &n);
+
+        switch (n)  // switch case to select between single player mode or
+                    // double player mode
+        {
+        case 1:
+            singlemode();
+            break;
+        case 2:
+            doublemode();
+            break;
+        default:
+            printf("THANK YOU and EXIT!");
+        }
+
+        printf("Next game ? : ");
+        printf("Enter 1 – YES and 0 - NO ");
+        scanf("%d", &l);
+
+    } while (l == 1);
+
+    return 0;
+}
+
+/**
+ * @brief Implementation of game vs computer
+ *
+ * @returns None
+ */
 void singlemode()
 {
     int m;
@@ -66,6 +138,11 @@ void singlemode()
     }
 }
 
+/**
+ * @brief Implementation of game vs another player.
+ *
+ * @returns None
+ */
 void doublemode()
 {
     int m;
@@ -155,6 +232,16 @@ int check_placex(){
 }	
 
 
+
+
+
+/**
+ * @brief Update table by placing an `X`
+ *
+ * @param m location to place `X`
+ *
+ * @returns None
+ */
 void placex(int m)
 {
     int n1 = 0;
@@ -176,8 +263,11 @@ void placex(int m)
 		placex(n);
     }
 }
-
-
+/**
+ * @brief Update table by placing an `O`
+ *
+ * @returns None
+ */
 void place()
 {
 
@@ -196,8 +286,13 @@ void place()
         }
     }
 }
-
-
+/**
+ * @brief Update table by placing an `O`
+ *
+ * @param e1 location to place `O`
+ *
+ * @returns None
+ */
 void placey(int e1)
 {
     int n1 = 0;
@@ -219,8 +314,13 @@ void placey(int e1)
 		placex(n);
     }
 }
-
-
+/**
+ * @brief Implementation of win conditon checker for 'X' or 'O' whenever the table is updated
+ *
+ * @returns -1: if 'X' won 
+ * @returns -2: if 'O' won
+ * @returns 0: if there is no win condition for 'X' or 'O' 
+ */
 int checkwin()
 {
     if (game_table[0] == game_table[1] && game_table[1] == game_table[2])
