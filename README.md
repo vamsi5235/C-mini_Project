@@ -7,6 +7,7 @@ The tic-tac-toe game is played on a 3x3 grid the game is played by two players, 
 # Badges
 [![Code Grade](https://www.code-inspector.com/project/27733/score/svg)](https://www.code-inspector.com)
 [![Code Grade](https://www.code-inspector.com/project/27733/status/svg)](https://www.code-inspector.com)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/af7d985178f14fc4be376359d8d8303c)](https://www.codacy.com/gh/vamsi5235/C-mini_Project/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vamsi5235/C-mini_Project&amp;utm_campaign=Badge_Grade)
 
 
 
